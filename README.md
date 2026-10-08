@@ -1,77 +1,79 @@
 # NEURO·V2
 
-**İnsan v1.0 → v2.0** — hayatını planlamana ve beynini geliştirmene yardımcı olan, futuristik bir SwiftUI uygulaması. Ortada canlı bir 3B beyin simülasyonu var: hangi görev beynin hangi bölgesini yüzde kaç çalıştırıyor, gerçek zamanlı görürsün.
+**Human v1.0 → v2.0** — a futuristic SwiftUI app that helps you plan your life and train your brain. At the center is a live 3D brain simulation: see in real time which task drives which brain region, and by what percentage.
 
-> ⚠️ Bölge yüzdeleri nörobilim literatürüne dayanan **kabaca tahminlerdir**, tıbbi ölçüm değildir. Tıbbi tavsiye yerine geçmez.
+> ⚠️ Region percentages are **rough estimates** based on neuroscience literature, not medical measurements. This app is not medical advice.
 
-## Özellikler
+## Features
 
-- **3B beyin simülasyonu:** ~900 nöron, bağlantılar ve akan sinyal atımları. Sürükleyerek döndür, bir bölgeye dokunarak odaklan.
-- **10 beyin bölgesi:** prefrontal, motor, duyusal, parietal, oksipital, temporal, hipokampus, amigdala, beyincik, beyin sapı. Her biri canlı `%` etiketiyle gösterilir.
-- **Görev kütüphanesi:** 14 görev (derin çalışma, okuma, dil öğrenme, kardiyo, meditasyon, müzik, uyku…). Birini seçince bölgeler o görevin aktivasyon yüzdelerine geçer.
-- **Gün planı:** Görev ekle/sil, tamamla, **Günü Simüle Et** ile günü baştan sona beyin üzerinde izle.
-- **Evrim ilerlemesi:** Odak, Bellek, Yaratıcılık, Beden ve Duygu becerileri XP kazanır; hepsi dolunca `v2.00`.
-- **Plan analizi:** Planında en az çalışan bölgeyi bulur, onu en çok çalıştıran görevi önerir.
-- **Geri bildirim:** Haptik titreşim (iOS ve Mac trackpad) ve isteğe bağlı, kodla üretilen ambient ses.
+- **3D brain simulation:** ~900 neurons with connections and traveling signal pulses. Drag to rotate, tap a region to focus on it.
+- **10 brain regions:** prefrontal, motor, sensory, parietal, occipital, temporal, hippocampus, amygdala, cerebellum, brainstem. Each one shows a live `%` label.
+- **Task library:** 14 tasks (deep work, reading, language learning, cardio, meditation, music, sleep…). Selecting one moves the regions to that task's activation levels.
+- **Daily plan:** add/remove tasks, mark them done, and press **Simulate Day** to watch your whole day play out on the brain.
+- **Evolution progress:** Focus, Memory, Creativity, Body, and Emotion skills earn XP; when they all fill up, you reach `v2.00`.
+- **Plan analysis:** finds the least-engaged region in your plan and suggests the task that works it best.
+- **Feedback:** haptics (iOS and Mac trackpad) and optional procedurally generated ambient sound.
 
-## Gereksinimler
+> The in-app UI is currently in Turkish.
 
-- Xcode (proje `objectVersion 90`, iOS/macOS/visionOS 27.0 hedefli)
-- Harici bağımlılık yok
+## Requirements
 
-## Çalıştırma
+- Xcode (project uses `objectVersion 90`, targeting iOS/macOS/visionOS 27.0)
+- No external dependencies
 
-1. `MVE.xcodeproj` dosyasını Xcode'da aç.
-2. `MVE` şemasını ve bir hedef seç (iPhone, iPad veya Mac).
-3. ▶ ile çalıştır.
+## Running
 
-Komut satırından derlemek için:
+1. Open `MVE.xcodeproj` in Xcode.
+2. Select the `MVE` scheme and a destination (iPhone, iPad, or Mac).
+3. Press ▶ to run.
+
+To build from the command line:
 
 ```bash
 xcodebuild -project MVE.xcodeproj -scheme MVE -destination 'generic/platform=macOS' build
 ```
 
-## Kullanım
+## Usage
 
-| Eylem | Sonuç |
+| Action | Result |
 |---|---|
-| Soldan bir görev seç | Beyin o görevin aktivasyon haritasına geçer |
-| Beyni sürükle | 3B döndürme (bırakınca yan görünüşe döner) |
-| Bir bölgeye dokun | Bölge bilgi kartı + o bölgeyi en çok çalıştıran görevler |
-| **Günü Simüle Et** | Planı sırayla oynatır, tamamlananlar XP kazandırır |
-| Plan kartındaki daire | Görevi tamamla / geri al |
-| Plan kartına sağ tık / uzun bas | Sil |
-| Hoparlör simgesi | Ambient sesi aç/kapat |
+| Pick a task from the library | The brain switches to that task's activation map |
+| Drag the brain | 3D rotation (eases back to the side view on release) |
+| Tap a region | Region info card + the tasks that engage it most |
+| **Simulate Day** | Plays the plan in order; completed tasks award XP |
+| Circle on a plan card | Mark task done / undo |
+| Right-click / long-press a plan card | Delete |
+| Speaker icon | Toggle ambient sound |
 
-Arayüz ekran genişliğine uyum sağlar: Mac ve iPad'de 3 kolon, iPhone'da *Beyin / Görevler / Durum* sekmeleri.
+The layout adapts to screen width: 3 columns on Mac and iPad, and *Brain / Tasks / Status* tabs on iPhone.
 
-## Proje yapısı
+## Project structure
 
 ```
 MVE/
-├── MyApp.swift       Uygulama girişi
-├── ContentView.swift Geniş / dar ekran düzeni
-├── Models.swift      Bölgeler, beceriler, görevler ve aktivasyon verileri, tema
-├── Store.swift       Uygulama durumu (@Observable): plan, XP, simülasyon, odak
-├── Brain.swift       Nöron ağı üretimi, 3B izdüşüm ve Canvas çizimi, jestler
-├── UI.swift          Paneller: kütüphane, durum, plan, banner
-└── Feedback.swift    Haptik ve ambient ses (AVAudioEngine)
+├── MyApp.swift        App entry point
+├── ContentView.swift  Wide / compact layouts
+├── Models.swift       Regions, skills, tasks and activation data, theme
+├── Store.swift        App state (@Observable): plan, XP, simulation, focus
+├── Brain.swift        Neuron network generation, 3D projection, Canvas rendering, gestures
+├── UI.swift           Panels: library, status, plan, banner
+└── Feedback.swift     Haptics and ambient sound (AVAudioEngine)
 ```
 
-## Veriyi özelleştirme
+## Customizing the data
 
-- **Görev ekle / yüzdeleri değiştir:** `Models.swift` içindeki `BrainTask.all`. Her görevin `activation` sözlüğü bölge başına 0–1 değer taşır.
-- **Bölge konumu / etiketi:** `Region` enum'unda `center`, `radius`, `labelPos`.
-- **Evrim hızı:** `Store.swift` içindeki `skillCap` (varsayılan 600 XP/beceri).
+- **Add a task / tweak percentages:** `BrainTask.all` in `Models.swift`. Each task's `activation` dictionary holds a 0–1 value per region.
+- **Region position / label placement:** `center`, `radius`, and `labelPos` on the `Region` enum.
+- **Evolution speed:** `skillCap` in `Store.swift` (default 600 XP per skill).
 
-Plan ve XP `UserDefaults` içinde saklanır; görev tamamlama işaretleri her yeni gün sıfırlanır.
+The plan and XP are stored in `UserDefaults`; completion checkmarks reset every new day.
 
-## Yol haritası
+## Roadmap
 
-- [ ] HealthKit (uyku, adım, HRV) ile gerçek veriden beyin tepkisi
-- [ ] SwiftData ile geçmiş günler, haftalık rapor ve grafikler
-- [ ] Mini beyin oyunları (n-back, Stroop, reaksiyon)
-- [ ] Seri (streak), bildirimler ve seviye atlama animasyonu
-- [ ] Widget / Live Activity (ayrı bir extension hedefi gerekir)
-- [ ] Yapay zekâ koçu
-- [ ] iCloud senkronu ve Apple Watch
+- [ ] HealthKit (sleep, steps, HRV) so the brain reacts to real data
+- [ ] SwiftData for history, weekly reports, and charts
+- [ ] Brain mini-games (n-back, Stroop, reaction time)
+- [ ] Streaks, notifications, and level-up animations
+- [ ] Widget / Live Activity (needs a separate extension target)
+- [ ] AI coach
+- [ ] iCloud sync and Apple Watch
